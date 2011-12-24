@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Dan Candela</string>
+	<key>Builder Version</key>
+	<string>6534.52.7</string>
+	<key>CFBundleDisplayName</key>
+	<string>TabSave</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.savetabs</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Menus</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>TabSaveMenu</string>
+				<key>Menu Items</key>
+				<array>
+					<dict>
+						<key>Checked State</key>
+						<real>0.0</real>
+						<key>Command</key>
+						<string>ts-mail</string>
+						<key>Identifier</key>
+						<string>TabSaveEmailItem</string>
+						<key>Image</key>
+						<string>ToolbarEmailButton.png</string>
+						<key>Title</key>
+						<string>Mail</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>ts-omnifocus</string>
+						<key>Identifier</key>
+						<string>TabSaveOmniFocusItem</string>
+						<key>Image</key>
+						<string>ToolbarOmniFocus.png</string>
+						<key>Title</key>
+						<string>OmniFocus</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>ts-instapaper</string>
+						<key>Identifier</key>
+						<string>TabSaveInstapaperItem</string>
+						<key>Image</key>
+						<string>ToolbarInstapaperButton.png</string>
+						<key>Title</key>
+						<string>Instapaper</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string></string>
+				<key>Identifier</key>
+				<string>TabSaveItem</string>
+				<key>Image</key>
+				<string>ToolbarTabSaveButton.png</string>
+				<key>Label</key>
+				<string>TabSave</string>
+				<key>Menu</key>
+				<string>TabSaveMenu</string>
+				<key>Tool Tip</key>
+				<string>Save URLs from all tabs</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>Description</key>
+	<string>Saves the URLs of each tab to Mail.app, OmniFocus, or Instapaper</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>https://github.com/dcandela/TabSave</string>
+</dict>
+</plist>

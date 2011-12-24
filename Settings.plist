@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<string>set_your_email_in_extension_preferences@your_domain.com</string>
+		<key>Key</key>
+		<string>TabSaveEmailAddress</string>
+		<key>Title</key>
+		<string>Email Address</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>Read these links</string>
+		<key>Key</key>
+		<string>TabSaveEmailSubject</string>
+		<key>Title</key>
+		<string>Email Subject</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>Read these links</string>
+		<key>Key</key>
+		<string>TabSaveOmniFocusSubject</string>
+		<key>Title</key>
+		<string>OmniFocus Subject</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string></string>
+		<key>Key</key>
+		<string>TabSaveInstapaperUsername</string>
+		<key>Title</key>
+		<string>Instapaper Username</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>TabSaveInstapaperPassword</string>
+		<key>Password</key>
+		<true/>
+		<key>Secure</key>
+		<true/>
+		<key>Title</key>
+		<string>Instapaper Password</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+</array>
+</plist>

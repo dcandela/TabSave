@@ -1,0 +1,167 @@
+<!-- Copyright 2011 Dan Candela.  All rights reserved. -->
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>global page</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.0/dojo/dojo.js" type="text/javascript"></script>
+	<script type="text/javascript">
+   
+	// Global variables
+ 	var URLs = "";
+	var emailAddress 		= safari.extension.settings.TabSaveEmailAddress;
+	var emailSubject 		= safari.extension.settings.TabSaveEmailSubject;
+	var omnifocusSubject 	= safari.extension.settings.TabSaveOmniFocusSubject;
+	var instapaperUsername 	= safari.extension.settings.TabSaveInstapaperUsername;
+	var instapaperPassword 	= safari.extension.secureSettings.TabSaveInstapaperPassword;
+
+    // Assemble a list of URLs from all tabs
+	function assembleURLs()
+	{
+		var activeWindow = safari.application.activeBrowserWindow;
+		var tabs = activeWindow.tabs;
+		URLs = "";
+		for (var i=0; i<tabs.length; ++i)
+		{
+			URLs += tabs[i].url;
+			if(i != tabs.length-1) URLs += "\n";
+		}
+	}
+	
+	function authenticateInstapaperSettings()
+	{
+		// Instapaper API: http://www.instapaper.com/api/simple
+		var instapaperUri = 'https://www.instapaper.com/api/authenticate';
+		console.log('validateInstatpaperSettings');
+
+		dojo.xhrPost({
+			url: instapaperUri,
+			handleAs: 'json',
+			headers: {
+				"Authorization": "Basic " + btoa(instapaperUsername + ":" + instapaperPassword)
+			},
+			handle: function(data, ioArgs) {
+				switch(ioArgs.xhr.status) {
+					case 200:
+						console.log('OK');
+						break;
+					case 403:
+						console.log('invalid username or password');
+						alert('Invalid Instapaper username/password');
+						break;
+					case 500: default:
+						console.log('service error');
+						alert('Instapaper username/password authentication: service error');
+						break;
+				}
+			}
+		});
+	}
+
+	// Update variables when settings change
+	function settingsChanged (event)
+	{
+		if (event.key == "TabSaveEmailAddress")
+		{
+			emailAddress = event.newValue;
+		} 
+		else if (event.key == "TabSaveEmailSubject")
+		{
+			emailSubject = event.newValue;
+		}
+		else if (event.key == "TabSaveOmniFocusSubject")
+		{
+			omnifocusSubject = event.newValue;
+		}
+		else if (event.key == "TabSaveInstapaperUsername")
+		{
+			instapaperUsername = event.newValue;
+			authenticateInstapaperSettings();
+		}
+		else if (event.key == "TabSaveInstapaperPassword")
+		{
+			instapaperPassword = event.newValue;
+			authenticateInstapaperSettings();
+			// TODO authenticate with instapaper
+		}
+	}
+ 
+	// if event handlers are in the global HTML page, register with application:
+ 	safari.extension.settings.addEventListener("change", settingsChanged, false);
+ 	safari.extension.secureSettings.addEventListener("change", settingsChanged, false);
+ 	
+ 	function getCurrentDateString ()
+ 	{
+ 		var currentTime = new Date();
+		var month = currentTime.getMonth() + 1;
+		var day = currentTime.getDate();
+		var year = currentTime.getFullYear();
+		return (month + "/" + day + "/" + year);
+	}
+	
+    function performCommand(event)
+	{
+		var date = "("+getCurrentDateString()+")";
+		
+		if (event.command === "ts-mail")
+		{
+			assembleURLs();
+			URLs = encodeURIComponent(URLs);
+			
+			safari.application.activeBrowserWindow.tabs[0].url = 
+			"mailto:" + emailAddress + "?subject=" + emailSubject + " " + date + "&body=" + URLs;
+		}
+		else if (event.command === "ts-omnifocus")
+		{
+			// OmniFocus URI:  http://www.omnigroup.com/ -> search forums
+			assembleURLs();
+			safari.application.activeBrowserWindow.tabs[0].url = 
+			"omnifocus:///add?name=" + omnifocusSubject + " " + date + "&note=" + encodeURIComponent(URLs);
+		}
+		else if (event.command === "ts-instapaper")
+		{
+			// Instapaper API: http://www.instapaper.com/api/simple
+			var instapaperUri = 'https://www.instapaper.com/api/add';
+			var activeWindow = safari.application.activeBrowserWindow;
+			var tabs = activeWindow.tabs;
+
+			console.log('performCommand(ts-instapaper)');
+
+			for (var i=0; i<tabs.length; ++i)
+			{	
+				dojo.xhrPost({
+					url: instapaperUri,
+					handleAs: 'json',
+					headers: {
+						"Authorization": "Basic " + btoa(instapaperUsername + ":" + instapaperPassword)
+					},
+					content: {
+						url: tabs[i].url
+					},
+					handle: function(data, ioArgs) {
+						switch(ioArgs.xhr.status) {
+							case 201:
+								console.log('success');
+								break;
+							case 403:
+								console.log('invalid username or password');
+								break;
+							case 500: default:
+								console.log('service error');
+								break;
+						}
+					}
+				});
+			}
+		}
+	}
+
+	// if event handlers are in the global HTML page, register with application:
+	safari.application.addEventListener("command", performCommand, false);
+ 
+	</script>
+</head>
+<body> </body>
+</html>
+
+
