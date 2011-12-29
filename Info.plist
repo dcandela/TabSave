@@ -5,17 +5,17 @@
 	<key>Author</key>
 	<string>Dan Candela</string>
 	<key>Builder Version</key>
-	<string>6534.52.7</string>
+	<string>7534.52.7</string>
 	<key>CFBundleDisplayName</key>
 	<string>TabSave</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.savetabs</string>
+	<string>com.yourCompany.safari.tabSave</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Global Page</key>
@@ -99,6 +99,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://raw.github.com/dcandela/TabSave/master/Update.plist</string>
 	<key>Website</key>
 	<string>https://github.com/dcandela/TabSave</string>
 </dict>
